@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { App } from './App';
+import { SignUpForm } from './SignUpForm';
 
-describe('<App />', () => {
+describe('<SignUpForm />', () => {
   it('renders without crashing', () => {
-    render(<App />);
+    render(<SignUpForm />);
   })
 });
