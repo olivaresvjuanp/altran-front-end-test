@@ -5,6 +5,8 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { SignInForm } from './SignInForm';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginLeft: 'auto',
@@ -18,8 +20,9 @@ export const SignIn: React.FunctionComponent = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper} square>
-      <Typography>Sign In</Typography>
+    <Paper className={classes.paper}>
+      <Typography align='center' variant='h6'>Sign in</Typography>
+      <SignInForm />
     </Paper>
   );
 };

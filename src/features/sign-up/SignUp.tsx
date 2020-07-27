@@ -19,7 +19,7 @@ export const SignUp: React.FunctionComponent = () => {
 
   return (
     <Paper className={classes.paper} square>
-      <Typography>Sign Up</Typography>
+      <Typography>Sign up</Typography>
     </Paper>
   );
 };

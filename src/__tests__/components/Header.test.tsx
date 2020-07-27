@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { App } from './App';
+import { Header } from '../../components/Header';
 
-describe('<App />', () => {
+describe('<Header />', () => {
   it('renders without crashing', () => {
-    render(<App />);
+    render(<Header />);
   })
 });
