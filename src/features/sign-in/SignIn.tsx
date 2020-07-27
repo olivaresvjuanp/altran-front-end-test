@@ -14,12 +14,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const SignInPage: React.FunctionComponent = () => {
+export const SignIn: React.FunctionComponent = () => {
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper} square>
-      <Typography>Sign In Page</Typography>
+      <Typography>Sign In</Typography>
     </Paper>
   );
 };

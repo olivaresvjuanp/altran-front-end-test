@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import { SignInPage } from './SignInPage';
+import { SignIn } from './SignIn';
 
-describe('<App />', () => {
+describe('<SignIn />', () => {
   it('renders without crashing', () => {
-    render(<SignInPage />);
+    render(<SignIn />);
   })
 });

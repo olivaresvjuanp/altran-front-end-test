@@ -20,7 +20,8 @@ import {
 import 'fontsource-roboto';
 
 import { Header } from './Header';
-import { SignInPage } from '../features/sign-in/SignInPage';
+import { SignIn } from '../features/sign-in/SignIn';
+import { SignUp } from '../features/sign-up/SignUp';
 
 const defaultTheme = createMuiTheme();
 
@@ -51,8 +52,11 @@ export const App: React.FunctionComponent = () => {
       <Container>
         <Router>
           <Switch>
-            <Route exact path='/'>
-              <SignInPage />
+            <Route path='/sign-in'>
+              <SignIn />
+            </Route>
+            <Route path='/sign-up'>
+              <SignUp />
             </Route>
           </Switch>
         </Router>
