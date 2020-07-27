@@ -19,8 +19,8 @@ import {
 
 import 'fontsource-roboto';
 
-import { Header } from './components/Header';
-import { SignInPage } from './components/SignInPage';
+import { Header } from './Header';
+import { SignInPage } from '../features/sign-in/SignInPage';
 
 const defaultTheme = createMuiTheme();
 
