@@ -4,10 +4,9 @@ import {
   TextField
 } from '@material-ui/core';
 
-interface AuthFormTextFieldProps extends Omit<TextFieldProps, 'fullWidth' | 'margin' | 'required' | 'size' | 'variant'> {
-}
-
-export const AuthFormTextField: React.FunctionComponent<AuthFormTextFieldProps> = props => {
+export const AuthFormTextField: React.FunctionComponent<
+  Omit<TextFieldProps, 'fullWidth' | 'margin' | 'required' | 'size' | 'variant'>
+> = props => {
   return (
     <TextField
       fullWidth
