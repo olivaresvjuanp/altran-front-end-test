@@ -27,7 +27,13 @@ const theme = createMuiTheme({
     MuiContainer: {
       root: {
         marginTop: defaultTheme.spacing(8) + 4,
-        padding: `0 0 ${defaultTheme.spacing(4)} 0`
+        paddingBottom: defaultTheme.spacing(4)
+      }
+    },
+    MuiTablePagination: {
+      toolbar: {
+        paddingLeft: 0,
+        paddingRight: 0
       }
     }
   }

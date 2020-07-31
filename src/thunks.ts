@@ -28,7 +28,7 @@ export const thunkFetchGnomes = (): ThunkAction<void, RootState, unknown, Action
     await axios.get('https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json')
       .then(response => {
         dispatch(setGnomes(response.data.Brastlewark));
-        dispatch(paginateGnomes(1));
+        dispatch(paginateGnomes());
       })
       .catch((error: AxiosError) => {
         const response = error.response;

@@ -1,33 +1,31 @@
 import React from 'react';
 import {
-  useDispatch,
-  useSelector
+  useSelector,
+  useDispatch
 } from 'react-redux';
 import {
   Grid,
-  Box
+  Box,
+  TablePagination
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Pagination } from '@material-ui/lab';
 
 import { Gnome } from './Gnome';
-import { paginateGnomes } from './gnomesSlice';
+import {
+  paginateGnomes,
+  setRowsPerPage,
+  setPage
+} from './gnomesSlice';
 import { RootState } from '../../store';
 import { thunkFetchGnomes } from '../../thunks';
 
 const useStyles = makeStyles(theme => ({
-  pagination: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column'
-  },
 }));
 
 export const Gnomes: React.FunctionComponent = () => {
+  const gnomesState = useSelector((state: RootState) => state.gnomes);
   const dispatch = useDispatch();
   const classes = useStyles();
-
-  const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
     dispatch(thunkFetchGnomes());
@@ -35,18 +33,21 @@ export const Gnomes: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      <Pagination
-        className={classes.pagination}
-        color='secondary'
-        count={Math.ceil(useSelector((state: RootState) => state.gnomes.gnomes.length) / 8)}
-        disabled={false}
-        onChange={(event, page: number) => {
-          setPage(page);
-          dispatch(paginateGnomes(page));
+      <TablePagination
+        component='div'
+        count={Math.ceil(gnomesState.gnomes.length / gnomesState.rowsPerPage)}
+        labelRowsPerPage='Gnomes per page'
+        onChangePage={(event, page) => {
+          dispatch(setPage(page + 1));
+          dispatch(paginateGnomes());
         }}
-        page={page}
-        showFirstButton
-        showLastButton
+        onChangeRowsPerPage={event => {
+          dispatch(setRowsPerPage(parseInt(event.target.value)));
+          dispatch(paginateGnomes());
+        }}
+        page={gnomesState.page - 1}
+        rowsPerPage={gnomesState.rowsPerPage}
+        rowsPerPageOptions={[4, 8, 12, 16, 20]}
       />
       <Box mt={2} />
       <Grid
@@ -55,7 +56,7 @@ export const Gnomes: React.FunctionComponent = () => {
         spacing={2}
       >
         {
-          useSelector((state: RootState) => state.gnomes.paginatedGnomes).map((gnome, index) => {
+          gnomesState.paginatedGnomes.map((gnome, index) => {
             return <Gnome key={gnome.id} {...gnome} />;
           })
         }

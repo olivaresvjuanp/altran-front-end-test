@@ -18,12 +18,16 @@ export type Gnome = {
 
 type GnomesState = {
   gnomes: Gnome[];
+  page: number;
   paginatedGnomes: Gnome[];
+  rowsPerPage: number;
 };
 
 const initialState: GnomesState = {
   gnomes: [],
-  paginatedGnomes: []
+  page: 1,
+  paginatedGnomes: [],
+  rowsPerPage: 8
 };
 
 export const gnomesSlice = createSlice({
@@ -33,13 +37,22 @@ export const gnomesSlice = createSlice({
     setGnomes: (state, action: PayloadAction<Gnome[]>) => {
       state.gnomes = action.payload;
     },
-    paginateGnomes: (state, action: PayloadAction<number>) => {
-      state.paginatedGnomes = _.slice(state.gnomes, (action.payload * 8) - 8, action.payload * 8);
-    }
+    paginateGnomes: state => {
+      const { gnomes, page, rowsPerPage } = state;
+      state.paginatedGnomes = _.slice(gnomes, (page * rowsPerPage) - rowsPerPage, page * rowsPerPage);
+    },
+    setRowsPerPage: (state, action: PayloadAction<number>) => {
+      state.rowsPerPage = action.payload;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   }
 });
 
 export const {
   setGnomes,
-  paginateGnomes
+  paginateGnomes,
+  setRowsPerPage,
+  setPage
 } = gnomesSlice.actions;
