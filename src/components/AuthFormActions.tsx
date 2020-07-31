@@ -27,6 +27,7 @@ export const AuthFormActions: React.FunctionComponent<AuthFormActionsProps> = pr
     <Grid className={classes.grid} container justify='space-between'>
       <Grid item>
         <Link
+          color='secondary'
           component={RouterLink}
           to={props.form === 'sign-in-form' ? '/sign-up' : '/sign-in'}
         >
@@ -36,7 +37,7 @@ export const AuthFormActions: React.FunctionComponent<AuthFormActionsProps> = pr
       <Grid item>
         <Button
           className={classes.button}
-          color='primary'
+          color='secondary'
           disabled={false}
           form={props.form}
           type='submit'

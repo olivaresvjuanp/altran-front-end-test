@@ -20,7 +20,7 @@ export const SignUp: React.FunctionComponent = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper} square>
+    <Paper className={classes.paper} elevation={2}>
       <Typography align='center' variant='h6'>Sign up</Typography>
       <SignUpForm />
     </Paper>

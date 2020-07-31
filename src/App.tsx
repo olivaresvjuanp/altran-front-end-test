@@ -9,19 +9,16 @@ import {
   Container
 } from '@material-ui/core';
 import {
-  red,
-  green
-} from '@material-ui/core/colors';
-import {
   createMuiTheme,
   ThemeProvider
 } from '@material-ui/core/styles';
 
 import 'fontsource-roboto';
 
-import { Header } from './Header';
-import { SignIn } from '../features/sign-in/SignIn';
-import { SignUp } from '../features/sign-up/SignUp';
+import { Header } from './features/header/Header';
+import { Gnomes } from './features/gnomes/Gnomes';
+import { SignIn } from './features/sign-in/SignIn';
+import { SignUp } from './features/sign-up/SignUp';
 
 const defaultTheme = createMuiTheme();
 
@@ -29,17 +26,9 @@ const theme = createMuiTheme({
   overrides: {
     MuiContainer: {
       root: {
-        marginTop: defaultTheme.spacing(8),
-        paddingBottom: defaultTheme.spacing(4)
+        marginTop: defaultTheme.spacing(8) + 4,
+        padding: `0 0 ${defaultTheme.spacing(4)} 0`
       }
-    }
-  },
-  palette: {
-    primary: {
-      main: red[500]
-    },
-    secondary: {
-      main: green[500]
     }
   }
 });
@@ -52,6 +41,9 @@ export const App: React.FunctionComponent = () => {
       <Container>
         <Router>
           <Switch>
+            <Route exact path='/'>
+              <Gnomes />
+            </Route>
             <Route path='/sign-in'>
               <SignIn />
             </Route>

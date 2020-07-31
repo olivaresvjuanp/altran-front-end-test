@@ -12,7 +12,6 @@ export const AuthFormTextField: React.FunctionComponent<
       fullWidth
       margin='dense'
       required
-      size='small'
       variant='filled'
       {...props}
     />

@@ -20,7 +20,7 @@ export const SignIn: React.FunctionComponent = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={2}>
       <Typography align='center' variant='h6'>Sign in</Typography>
       <SignInForm />
     </Paper>
