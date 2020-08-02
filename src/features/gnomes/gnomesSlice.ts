@@ -39,6 +39,7 @@ export const gnomesSlice = createSlice({
     },
     paginateGnomes: state => {
       const { gnomes, page, rowsPerPage } = state;
+
       state.paginatedGnomes = _.slice(gnomes, (page * rowsPerPage) - rowsPerPage, page * rowsPerPage);
     },
     setRowsPerPage: (state, action: PayloadAction<number>) => {
