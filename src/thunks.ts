@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios, { AxiosError } from 'axios';
 
-import { setGnomes, paginateGnomes } from './features/gnomes/gnomesSlice';
+import { Gnome, setGnomes, paginateGnomes } from './features/gnomes/gnomesSlice';
 import { } from './features/sign-in/signInSlice';
 import { } from './features/sign-in/signInSlice';
 import {
@@ -27,7 +27,12 @@ export const thunkFetchGnomes = (): ThunkAction<void, RootState, unknown, Action
 
     await axios.get('https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json')
       .then(response => {
-        dispatch(setGnomes(response.data.Brastlewark));
+        const gnomes: Gnome[] = response.data.Brastlewark.map((gnome: Gnome) => {
+          gnome.thumbnail = `https://altran.s3.eu-west-3.amazonaws.com/${Math.floor(Math.random() * 8) + 1}.jpg`;
+          return gnome;
+        });
+
+        dispatch(setGnomes(gnomes));
         dispatch(paginateGnomes());
       })
       .catch((error: AxiosError) => {
