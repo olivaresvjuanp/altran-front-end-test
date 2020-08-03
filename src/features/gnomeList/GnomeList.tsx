@@ -112,8 +112,8 @@ const useGnomeListStyles = makeStyles(theme => ({
 export const GnomeList: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const gnomeListState = useSelector((state: RootState) => state.gnomes);
-  const { path } = useRouteMatch();
   const classes = useGnomeListStyles();
+  const { path } = useRouteMatch();
 
   const [page, setPage] = React.useState(1);
 
@@ -135,8 +135,7 @@ export const GnomeList: React.FunctionComponent = () => {
           dispatch(thunkGetGnomes(page));
         }}
         onChangeRowsPerPage={event => {
-          //dispatch(setRowsPerPage(parseInt(event.target.value)));
-          //dispatch(setPage(1));
+          // ...
         }}
         page={page - 1}
         rowsPerPage={gnomeListState.rowsPerPage}

@@ -24,8 +24,10 @@ import { Header } from './features/header/Header';
 import { SignIn } from './features/sign-in/SignIn';
 import { SignUp } from './features/sign-up/SignUp';
 
+// We need to create a default Material-UI theme to access its properties in our custom theme.
 const defaultTheme = createMuiTheme();
 
+// Custom Material-UI theme.
 const theme = createMuiTheme({
   overrides: {
     MuiContainer: {

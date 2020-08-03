@@ -15,16 +15,25 @@ import {
 } from './features/system/systemSlice';
 import { RootState } from './store';
 
+/**
+ * // TODO
+ */
 export const thunkSignIn = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async () => {
   };
 };
 
+/**
+ * // TODO
+ */
 export const thunkSignUp = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async () => {
   };
 };
 
+/**
+ * Thunk action to get the total gnome count in the DB.
+ */
 export const thunkGetCount = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async dispatch => {
     dispatch(startLoading('thunk-get-count'));
@@ -51,6 +60,10 @@ export const thunkGetCount = (): ThunkAction<void, RootState, unknown, Action<st
   };
 };
 
+/**
+ * Thunk action to get gnomes from the DB.
+ * @param page
+ */
 export const thunkGetGnomes = (page: number): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async dispatch => {
     dispatch(startLoading('thunk-get-gnomes'));
