@@ -15,8 +15,8 @@ import {
 
 import 'fontsource-roboto';
 
+import { GnomeList } from './features/gnomeList/GnomeList';
 import { Header } from './features/header/Header';
-import { Gnomes } from './features/gnomes/Gnomes';
 import { SignIn } from './features/sign-in/SignIn';
 import { SignUp } from './features/sign-up/SignUp';
 
@@ -48,7 +48,7 @@ export const App: React.FunctionComponent = () => {
         <Router>
           <Switch>
             <Route exact path='/'>
-              <Gnomes />
+              <GnomeList />
             </Route>
             <Route path='/sign-in'>
               <SignIn />

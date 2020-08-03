@@ -2,7 +2,11 @@ import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import axios, { AxiosError } from 'axios';
 
-import { Gnome, setGnomes, paginateGnomes } from './features/gnomes/gnomesSlice';
+import config from './config.json';
+import {
+  setCount,
+  setGnomes
+} from './features/gnomeList/gnomeListSlice';
 import { } from './features/sign-in/signInSlice';
 import { } from './features/sign-in/signInSlice';
 import {
@@ -21,19 +25,39 @@ export const thunkSignUp = (): ThunkAction<void, RootState, unknown, Action<stri
   };
 };
 
-export const thunkFetchGnomes = (): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const thunkGetCount = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   return async dispatch => {
-    dispatch(startLoading('thunk-fetch-gnomes'));
+    dispatch(startLoading('thunk-get-count'));
 
-    await axios.get('https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json')
+    await axios.get(`${config.apiUrl}/gnomes/get-count`)
       .then(response => {
-        const gnomes: Gnome[] = response.data.Brastlewark.map((gnome: Gnome) => {
-          gnome.thumbnail = `https://altran.s3.eu-west-3.amazonaws.com/${Math.floor(Math.random() * 8) + 1}.jpg`;
-          return gnome;
-        });
+        dispatch(setCount(response.data.payload.count));
+      })
+      .catch((error: AxiosError) => {
+        const response = error.response;
 
-        dispatch(setGnomes(gnomes));
-        dispatch(paginateGnomes());
+        if (response) {
+          switch (response.status) {
+            default:
+              console.error(response.status);
+          }
+        } else {
+          console.error(0);
+        }
+      })
+      .finally(() => {
+        dispatch(stopLoading());
+      });
+  };
+};
+
+export const thunkGetGnomes = (page: number): ThunkAction<void, RootState, unknown, Action<string>> => {
+  return async dispatch => {
+    dispatch(startLoading('thunk-get-gnomes'));
+
+    await axios.get(`${config.apiUrl}/gnomes/get-gnomes/${page}`)
+      .then(response => {
+        dispatch(setGnomes(response.data.payload.gnomes));
       })
       .catch((error: AxiosError) => {
         const response = error.response;

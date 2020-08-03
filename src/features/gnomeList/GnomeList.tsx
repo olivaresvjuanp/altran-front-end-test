@@ -1,8 +1,12 @@
 import React from 'react';
 import {
-  useSelector,
-  useDispatch
+  useDispatch,
+  useSelector
 } from 'react-redux';
+import {
+  useRouteMatch,
+  Route
+} from 'react-router-dom';
 import {
   Box,
   IconButton,
@@ -17,19 +21,19 @@ import {
   LastPage as LastPageIcon
 } from '@material-ui/icons';
 
-import { Gnome } from './Gnome';
-import {
-  paginateGnomes,
-  setRowsPerPage,
-  setPage
-} from './gnomesSlice';
+import { GnomeListItem } from './GnomeListItem';
+import { } from './gnomeListSlice';
+import { GnomeDetails } from '../gnomeDetails/GnomeDetails';
 import { RootState } from '../../store';
-import { thunkFetchGnomes } from '../../thunks';
+import {
+  thunkGetCount,
+  thunkGetGnomes
+} from '../../thunks';
 
 const useTablePaginationActionsStyles = makeStyles(theme => ({
   root: {
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5)
+    marginLeft: theme.spacing(4)
   }
 }));
 
@@ -95,12 +99,16 @@ const TablePaginationActions: React.FunctionComponent<TablePaginationActionsProp
   );
 };
 
-export const Gnomes: React.FunctionComponent = () => {
-  const gnomesState = useSelector((state: RootState) => state.gnomes);
+export const GnomeList: React.FunctionComponent = () => {
   const dispatch = useDispatch();
+  const gnomeListState = useSelector((state: RootState) => state.gnomes);
+  const { path } = useRouteMatch();
+
+  const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    dispatch(thunkFetchGnomes());
+    dispatch(thunkGetCount());
+    dispatch(thunkGetGnomes(page));
   }, [dispatch]);
 
   return (
@@ -108,18 +116,19 @@ export const Gnomes: React.FunctionComponent = () => {
       <TablePagination
         ActionsComponent={TablePaginationActions}
         component='div'
-        count={gnomesState.gnomes.length}
-        labelRowsPerPage='Gnomes per page'
+        count={gnomeListState.count}
+        labelRowsPerPage='Per page'
         onChangePage={(event, page) => {
-          dispatch(setPage(page + 1));
-          dispatch(paginateGnomes());
+          page++;
+          setPage(page);
+          dispatch(thunkGetGnomes(page));
         }}
         onChangeRowsPerPage={event => {
-          dispatch(setRowsPerPage(parseInt(event.target.value)));
-          dispatch(paginateGnomes());
+          //dispatch(setRowsPerPage(parseInt(event.target.value)));
+          //dispatch(setPage(1));
         }}
-        page={gnomesState.page - 1}
-        rowsPerPage={gnomesState.rowsPerPage}
+        page={page - 1}
+        rowsPerPage={gnomeListState.rowsPerPage}
         rowsPerPageOptions={[4, 8, 12, 16, 20]}
       />
       <Box mt={2} />
@@ -129,11 +138,14 @@ export const Gnomes: React.FunctionComponent = () => {
         spacing={2}
       >
         {
-          gnomesState.paginatedGnomes.map((gnome, index) => {
-            return <Gnome key={gnome.id} {...gnome} />;
+          gnomeListState.gnomes.map(gnome => {
+            return <GnomeListItem key={gnome.id} {...gnome} />;
           })
         }
       </Grid>
+      <Route path={`${path}/:id`}>
+        <GnomeDetails />
+      </Route>
     </React.Fragment>
   );
 };
