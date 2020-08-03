@@ -11,14 +11,16 @@ import {
   Box,
   IconButton,
   Grid,
-  TablePagination
+  TablePagination,
+  Fab
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   FirstPage as FirstPageIcon,
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight as KeyboardArrowRightIcon,
-  LastPage as LastPageIcon
+  LastPage as LastPageIcon,
+  Add as AddIcon
 } from '@material-ui/icons';
 
 import { GnomeListItem } from './GnomeListItem';
@@ -99,10 +101,19 @@ const TablePaginationActions: React.FunctionComponent<TablePaginationActionsProp
   );
 };
 
+const useGnomeListStyles = makeStyles(theme => ({
+  fab: {
+    bottom: theme.spacing(2),
+    position: 'fixed',
+    right: theme.spacing(2)
+  }
+}));
+
 export const GnomeList: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const gnomeListState = useSelector((state: RootState) => state.gnomes);
   const { path } = useRouteMatch();
+  const classes = useGnomeListStyles();
 
   const [page, setPage] = React.useState(1);
 
@@ -143,6 +154,12 @@ export const GnomeList: React.FunctionComponent = () => {
           })
         }
       </Grid>
+      <Fab
+        className={classes.fab}
+        color='secondary'
+      >
+        <AddIcon />
+      </Fab>
       <Route path={`${path}/:id`}>
         <GnomeDetails />
       </Route>

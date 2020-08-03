@@ -49,7 +49,6 @@ const Component: React.FunctionComponent<Gnome> = props => {
           </CardActionArea>
           <CardContent>
             <Typography align='center'>{props.name}</Typography>
-            <Typography align='center'>{props.id}</Typography>
           </CardContent>
           <CardActions>
             <Button

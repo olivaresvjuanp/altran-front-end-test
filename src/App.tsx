@@ -9,6 +9,10 @@ import {
   Container
 } from '@material-ui/core';
 import {
+  red,
+  cyan
+} from '@material-ui/core/colors';
+import {
   createMuiTheme,
   ThemeProvider
 } from '@material-ui/core/styles';
@@ -35,6 +39,14 @@ const theme = createMuiTheme({
         paddingLeft: 0,
         paddingRight: 0
       }
+    }
+  },
+  palette: {
+    primary: {
+      main: red[500]
+    },
+    secondary: {
+      main: cyan[500]
     }
   }
 });
