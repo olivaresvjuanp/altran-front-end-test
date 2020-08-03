@@ -18,7 +18,7 @@ Como dije antes, la prueba no está como yo quiero que esté, por lo que probarl
 
 En cualquier directorio, abrir el terminal y correr `git clone https://github.com/olivaresvjuanp/altran-front-end-test.git`, luego, dentro de la carpeta `altran-front-end-test` ir al directorio `/src`, copiar el archivo `config-example.json` y pegarlo con el nombre `config.json`. Dentro de este archivo JSON pegar lo siguiente en `apiUrl`: `http://localhost:3001/api`.
 
-Una vez hecho todo esto, en el directorio principal, correr: `yarn` (con esto se instalarán las dependencias), luego de que termine, correr `yarn start` y visitar `http://localhost:3000` en el navegador.
+Una vez hecho todo esto, en el directorio principal, correr: `yarn` (con esto se instalarán las dependencias), luego de que termine, correr `yarn start` y visitar http://localhost:3000 en el navegador.
 
 Para correr los tests, ejecutar el siguiente comando en el terminal: `yarn test`.
 
